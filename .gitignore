@@ -2,3 +2,6 @@ venv
 .idea
 supervisely_lib
 *secret_debug.env
+./src/vis.jpg
+./src/vis_contours.jpg
+./src/vis_filled.jpg
