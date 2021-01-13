@@ -5,3 +5,5 @@ supervisely_lib
 ./src/vis.jpg
 ./src/vis_contours.jpg
 ./src/vis_filled.jpg
+/src/demo.jpeg
+/src/vis.jpg
