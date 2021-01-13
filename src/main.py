@@ -15,6 +15,11 @@ def init_output_meta():
     global meta
 
     _classes = []
+    _classes.extend([
+        sly.ObjClass("person", sly.Rectangle),
+        sly.ObjClass("car", sly.Polygon),
+        sly.ObjClass("dog", sly.Bitmap),
+    ])
     for i in range(CNT_CLASSES):
         _classes.append(sly.ObjClass(f"class-{i}", random.choice([sly.Rectangle, sly.Polygon, sly.Bitmap])))
     classes = sly.ObjClassCollection(_classes)
@@ -26,6 +31,7 @@ def init_output_meta():
     # ])
 
     _tags = []
+    _tags.append(sly.TagMeta("confidence", sly.TagValueType.ANY_NUMBER))
     for i in range(CNT_TAGS):
         _tags.append(sly.TagMeta(f"tag-{i}", sly.TagValueType.ANY_NUMBER))
     tags = sly.ObjClassCollection(_tags)
@@ -106,10 +112,10 @@ def inference_image_id(api: sly.Api, task_id, context, state, app_logger):
     image_id = state["image_id"]
     debug_visualization = state.get("debug_visualization", False)
     image = api.image.download_np(image_id)  # RGB image
-    ann = inference(image, debug_visualization)
+    ann_json = inference(image, debug_visualization)
 
     request_id = context["request_id"]
-    my_app.send_response(request_id, data=ann.to_json())
+    my_app.send_response(request_id, data=ann_json)
 
 
 def debug_inference():
