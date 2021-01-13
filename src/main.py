@@ -1,22 +1,38 @@
 import math
 import numpy as np
 import cv2
+import random
 import supervisely_lib as sly
 
 my_app = sly.AppService()
 meta: sly.ProjectMeta = None
 
+CNT_CLASSES = 100
+CNT_TAGS = 50
+
 
 def init_output_meta():
     global meta
-    classes = sly.ObjClassCollection([
-        sly.ObjClass("person", sly.Rectangle),
-        sly.ObjClass("car", sly.Polygon),
-        sly.ObjClass("dog", sly.Bitmap),
-    ])
-    tags = sly.TagMetaCollection([
-        sly.TagMeta("confidence", sly.TagValueType.ANY_NUMBER)
-    ])
+
+    _classes = []
+    for i in range(CNT_CLASSES):
+        _classes.append(sly.ObjClass(f"class-{i}", random.choice([sly.Rectangle, sly.Polygon, sly.Bitmap])))
+    classes = sly.ObjClassCollection(_classes)
+
+    # classes = sly.ObjClassCollection([
+    #     sly.ObjClass("person", sly.Rectangle),
+    #     sly.ObjClass("car", sly.Polygon),
+    #     sly.ObjClass("dog", sly.Bitmap),
+    # ])
+
+    _tags = []
+    for i in range(CNT_TAGS):
+        _tags.append(sly.TagMeta(f"tag-{i}", sly.TagValueType.ANY_NUMBER))
+    tags = sly.ObjClassCollection(_tags)
+
+    # tags = sly.TagMetaCollection([
+    #     sly.TagMeta("confidence", sly.TagValueType.ANY_NUMBER)
+    # ])
     meta = sly.ProjectMeta(classes, tags)
 
 
@@ -75,7 +91,9 @@ def get_output_classes_and_tags(api: sly.Api, task_id, context, state, app_logge
 def get_session_info(api: sly.Api, task_id, context, state, app_logger):
     info = {
         "app": "nn template app",
-        "model": "/abc/def.pt"
+        "model": "/abc/def.pt",
+        "custom-field1": "maxim",
+        "custom-field2": "denis"
     }
     request_id = context["request_id"]
     my_app.send_response(request_id, data=info)
