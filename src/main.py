@@ -65,9 +65,20 @@ def inference(image: np.ndarray, debug_visualization=False) -> sly.Annotation:
 
 @my_app.callback("get_output_classes_and_tags")
 @sly.timeit
-def merge(api: sly.Api, task_id, context, state, app_logger):
+def get_output_classes_and_tags(api: sly.Api, task_id, context, state, app_logger):
     request_id = context["request_id"]
     my_app.send_response(request_id, data=meta.to_json())
+
+
+@my_app.callback("get_session_info")
+@sly.timeit
+def get_session_info(api: sly.Api, task_id, context, state, app_logger):
+    info = {
+        "app": "nn template app",
+        "model": "/abc/def.pt"
+    }
+    request_id = context["request_id"]
+    my_app.send_response(request_id, data=info)
 
 
 @my_app.callback("inference_image_id")
