@@ -10,6 +10,6 @@
   "gui_template": "src/gui.html",
   "task_location": "application_sessions",
   "isolate": true,
-  "icon": "https://img.icons8.com/color/96/000000/api-settings.png",
+  "icon": "https://github.com/supervisely-ecosystem/nn-serve-template/assets/48245050/e243c20b-8dc6-4724-a3cc-63bb41e5d160",
   "icon_background": "#FFFFFF"
 }
