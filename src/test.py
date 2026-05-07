@@ -1,5 +1,5 @@
 import json
-import supervisely_lib as sly
+import supervisely as sly
 
 api = sly.Api.from_env()
 
