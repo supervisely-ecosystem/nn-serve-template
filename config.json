@@ -1,11 +1,12 @@
 {
   "name": "NN Serve Template",
   "type": "app",
+  "instance_version": "6.15.60",
   "categories": [
     "development"
   ],
   "description": "How to deploy NN and send requests",
-  "docker_image": "supervisely/base-py-sdk:6.1.44",
+  "docker_image": "supervisely/base-py-sdk-hardened:6.73.564",
   "main_script": "src/main.py",
   "gui_template": "src/gui.html",
   "task_location": "application_sessions",

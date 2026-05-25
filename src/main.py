@@ -2,7 +2,7 @@ import math
 import numpy as np
 import cv2
 import random
-import supervisely_lib as sly
+import supervisely as sly
 
 my_app = sly.AppService()
 meta: sly.ProjectMeta = None
